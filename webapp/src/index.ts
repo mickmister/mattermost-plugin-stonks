@@ -1,9 +1,9 @@
 import manifest from './manifest';
+import OptionsModal from './components/options_modal';
 
 export default class Plugin {
-    // eslint-disable-next-line no-unused-vars
     initialize(registry, store) {
-        // @see https://developers.mattermost.com/extend/plugins/webapp/reference/
+        registry.registerRootComponent(OptionsModal);
     }
 }
 

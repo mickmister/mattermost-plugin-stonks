@@ -22,6 +22,11 @@ type Plugin struct {
 
 // ServeHTTP demonstrates a plugin that handles HTTP requests by greeting the world.
 func (p *Plugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path {
+	case "/yahoo":
+		p.httpHandleYahoo(c, w, r)
+		return
+	}
 	fmt.Fprint(w, "Hello, world!")
 }
 
