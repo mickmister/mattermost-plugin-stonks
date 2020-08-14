@@ -26,6 +26,9 @@ func (p *Plugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *http.Req
 	case "/yahoo":
 		p.httpHandleYahoo(c, w, r)
 		return
+	case "/etrade":
+		p.httpHandleETrade(c, w, r)
+		return
 	}
 	fmt.Fprint(w, "Hello, world!")
 }

@@ -37,6 +37,19 @@ const timeFrameNames = {
     [TimeFrame.THREE_YEARS]: '3 Years',
 }
 
+export const sharePriceTimeFrames = {
+    [TimeFrame.ONE_DAY]: '1',
+    [TimeFrame.THREE_DAYS]: '3',
+    [TimeFrame.FIVE_DAYS]: '5',
+    [TimeFrame.ONE_MONTH]: '31',
+    [TimeFrame.THREE_MONTHS]: '90',
+    [TimeFrame.SIX_MONTHS]: '180',
+    [TimeFrame.NINE_MONTHS]: '270',
+    [TimeFrame.ONE_YEAR]: '365',
+    [TimeFrame.TWO_YEARS]: '730',
+    [TimeFrame.THREE_YEARS]: '1096',
+}
+
 export const timeFrameToName = (timeFrame: TimeFrame): string => {
     return timeFrameNames[timeFrame];
 }
@@ -64,7 +77,21 @@ export const timeFrameToName = (timeFrame: TimeFrame): string => {
 */
 
 
-export const yahooResponseToETradePicture = (symbol: string, expiration: string, strike: string, timeframe: TimeFrame) => {
+export const yahooResponseToETradeOptionsPicture = (symbol: string, expiration: string, strike: string, timeframe: TimeFrame) => {
+    //https://optchart.etrade.com/graphs/NOW.CLX---201016C00240000.d44.t2.s1.v0.png
+    // expiration = '2020-08-21';
+    let strikeFormatted = (parseFloat(strike) * 1000).toString();
+    const missingZeros = 8 - strikeFormatted.length;
+    strikeFormatted = '0'.repeat(missingZeros) + strikeFormatted;
+
+    const missingDashes = 6 - symbol.length;
+    const symbolFormatted = symbol + '-'.repeat(missingDashes);
+
+    const expFormatted = expiration.substring(2).replace(/\-/g, '');
+    return `https://optchart.etrade.com/graphs/NOW.${symbolFormatted}${expFormatted}C${strikeFormatted}.${timeframe}.t2.s1.v0.png`;
+}
+
+export const yahooResponseToETradeSharePricePicture = (symbol: string, expiration: string, strike: string, timeframe: TimeFrame) => {
     //https://optchart.etrade.com/graphs/NOW.CLX---201016C00240000.d44.t2.s1.v0.png
     // expiration = '2020-08-21';
     let strikeFormatted = (parseFloat(strike) * 1000).toString();

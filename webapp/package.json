@@ -55,7 +55,7 @@
     "jest": "26.1.0",
     "jest-canvas-mock": "2.2.0",
     "jest-junit": "11.0.1",
-    "mattermost-webapp": "github:mattermost/mattermost-webapp#23f5f93d9f12a7e2b5623e5cee6814366abd9a0f",
+    "mattermost-webapp": "github:mattermost/mattermost-webapp#2270c8aa9db5cb5ee9a0ddbbe972a6d56e1def8d",
     "sass-loader": "9.0.2",
     "style-loader": "1.2.1",
     "webpack": "4.43.0",
@@ -63,8 +63,10 @@
   },
   "dependencies": {
     "core-js": "3.6.5",
+    "mattermost-redux": "github:mattermost/mattermost-redux#d39679ad4df4d76b684dbfffffcd9737ec94ea92",
     "react": "16.13.1",
     "react-redux": "7.2.0",
+    "react-select": "3.1.0",
     "redux": "4.0.5",
     "typescript": "3.9.6"
   },

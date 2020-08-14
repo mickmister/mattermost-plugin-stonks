@@ -9,12 +9,6 @@ import (
 	"github.com/mattermost/mattermost-server/v5/plugin"
 )
 
-type RemoteAPI interface {
-	FetchYahoo(symbol, expiration string) (*YahooResponse, error)
-}
-
-type remote struct{}
-
 type YahooShort struct {
 	Expiration string    `json:"expiration"`
 	Strikes    []float64 `json:"strikes"`
@@ -69,10 +63,21 @@ func (p *Plugin) httpHandleYahoo(c *plugin.Context, w http.ResponseWriter, r *ht
 		w.Write([]byte(err.Error()))
 		return
 	}
+	if yahooRes.OptionChain.Error != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		e := fmt.Sprintf("%v", yahooRes.OptionChain.Error)
+		w.Write([]byte(e))
+		return
+	}
 
-	res := []*YahooShort{}
-	short := convertYahooResToShort(yahooRes)
-	res = append(res, short)
+	if len(yahooRes.OptionChain.Result) == 0 {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Failed to fetch yahoo result"))
+		return
+	}
+
+	res := yahooRes.OptionChain.Result[0]
+	res.Options = append(res.Options, yahooRes.OptionChain.Result[0].Options[0])
 
 	for _, exp := range yahooRes.OptionChain.Result[0].ExpirationDates[1:] {
 		yahooRes, err = rem.FetchYahoo(symbol, exp)
@@ -81,10 +86,8 @@ func (p *Plugin) httpHandleYahoo(c *plugin.Context, w http.ResponseWriter, r *ht
 			w.Write([]byte(err.Error()))
 			return
 		}
-		short = convertYahooResToShort(yahooRes)
-		res = append(res, short)
+		res.Options = append(res.Options, yahooRes.OptionChain.Result[0].Options[0])
 	}
-	// w.Write(yahooRes)
 
 	b, err := json.Marshal(res)
 	if err != nil {

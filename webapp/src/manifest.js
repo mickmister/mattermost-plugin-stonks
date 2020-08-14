@@ -21,7 +21,16 @@ const manifest = JSON.parse(`
     "settings_schema": {
         "header": "",
         "footer": "",
-        "settings": []
+        "settings": [
+            {
+                "key": "ETradeCookie",
+                "display_name": "Cookie to allow retrieval of share price graphs",
+                "type": "text",
+                "help_text": "",
+                "placeholder": "",
+                "default": ""
+            }
+        ]
     }
 }
 `);

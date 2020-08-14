@@ -1,0 +1,5 @@
+export enum ActionType {
+    OPEN_OPTIONS_MODAL = 'stonks_OPEN_OPTIONS_MODAL',
+    CLOSE_OPTIONS_MODAL = 'stonks_CLOSE_OPTIONS_MODAL',
+    TOGGLE_OPTIONS_MODAL = 'stonks_TOGGLE_OPTIONS_MODAL',
+}
