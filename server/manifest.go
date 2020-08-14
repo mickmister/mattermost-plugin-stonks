@@ -12,7 +12,7 @@ var manifest *model.Manifest
 
 const manifestStr = `
 {
-  "id": "com.mattermost.plugin-starter-template",
+  "id": "stonks",
   "name": "Plugin Starter Template",
   "description": "This plugin serves as a starting point for writing a Mattermost plugin.",
   "version": "0.1.0",
@@ -31,7 +31,16 @@ const manifestStr = `
   "settings_schema": {
     "header": "",
     "footer": "",
-    "settings": []
+    "settings": [
+      {
+        "key": "ETradeCookie",
+        "display_name": "Cookie to allow retrieval of share price graphs",
+        "type": "text",
+        "help_text": "",
+        "placeholder": "",
+        "default": ""
+      }
+    ]
   }
 }
 `
