@@ -13,8 +13,8 @@ var manifest *model.Manifest
 const manifestStr = `
 {
   "id": "stonks",
-  "name": "Plugin Starter Template",
-  "description": "This plugin serves as a starting point for writing a Mattermost plugin.",
+  "name": "Stonks",
+  "description": "Manage your stonks!",
   "version": "0.1.0",
   "min_server_version": "5.12.0",
   "server": {
